@@ -242,3 +242,96 @@ body {
 .logo, .main-menu, .button, .submenu {
 	pointer-events: auto;
 }
+
+/* 1. Немного уменьшаем базовый коэффициент масштабирования шрифтов */
+@media (max-width: 1024px) {
+  :root {
+    --index: calc(0.8vw + 0.8vh);
+  }
+}
+
+/* 2. Основные стили для смартфонов (до 768px) */
+@media (max-width: 768px) {
+  /* Контейнер на всю ширину с небольшими отступами */
+  .container {
+    padding: 0 1em;
+  }
+
+  /* Шапка: распределяем логотип и кнопку меню по краям */
+  .top-line {
+    padding: 1.5em 0;
+  }
+
+  .row {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Скрываем десктопное меню и верхнюю кнопку, оставляем только логотип и гамбургер */
+  .main-menu,
+  .button--top {
+    display: none;
+  }
+
+  /* Уменьшаем логотип */
+  .logo img {
+    width: 8em; /* ~128px, оптимально для мобильных */
+  }
+
+  /* Увеличиваем зону нажатия кнопки мобильного меню */
+  .submenu {
+    --anim-menu-btn-width: 1.5em;
+    --anim-menu-btn-gap: 0.25em;
+    pointer-events: auto;
+  }
+
+  /* Заголовки: используем clamp, чтобы текст не вылезал за экран, но и не был слишком мелким */
+  .header-content h1 {
+    font-size: clamp(2.5rem, calc(var(--index) * 8), 4rem);
+    line-height: 1.1;
+    padding: 0 0.5em;
+  }
+
+  /* Текст описания: улучшаем читаемость */
+  .header-content p {
+    max-width: 100%;
+    padding: 0 1em;
+    font-size: 0.95em;
+    line-height: 1.5;
+  }
+
+  /* Основная кнопка: делаем её широкой и удобной для тапа пальцем */
+  .button--main {
+    margin-top: 2em;
+    padding: 1.2em 2em;
+    font-size: 0.8em;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Уменьшаем нижний отступ, так как на мобильных экранах место ценно */
+  .header-bottom {
+    min-height: 60px;
+  }
+
+  /* Корректировка анимации букв для компактных экранов */
+  .letters .letter {
+    margin-left: calc(var(--index) * -1.5);
+    right: calc(var(--index) * -1.5);
+  }
+}
+
+/* 3. Дополнительные правки для очень маленьких экранов (например, iPhone SE) */
+@media (max-width: 375px) {
+  .header-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .logo img {
+    width: 6.5em;
+  }
+
+  .header-content p {
+    font-size: 0.85em;
+  }
+}
